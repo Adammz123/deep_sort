@@ -92,6 +92,7 @@ class Visualization(object):
         image_shape = 1024, int(aspect_ratio * 1024)
         self.viewer = ImageViewer(
             update_ms, image_shape, "Figure %s" % seq_info["sequence_name"])
+        self.viewer.enable_videowriter('./results/test.avi')
         self.viewer.thickness = 2
         self.frame_idx = seq_info["min_frame_idx"]
         self.last_idx = seq_info["max_frame_idx"]
@@ -128,7 +129,7 @@ class Visualization(object):
                 continue
             self.viewer.color = create_unique_color_uchar(track.track_id)
             self.viewer.rectangle(
-                *track.to_tlwh().astype(np.int), label=str(track.track_id))
+                *track.to_tlwh().astype(np.int32), label=str(track.track_id))
             # self.viewer.gaussian(track.mean[:2], track.covariance[:2, :2],
             #                      label="%d" % track.track_id)
 #

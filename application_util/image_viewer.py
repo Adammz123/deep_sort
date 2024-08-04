@@ -5,6 +5,7 @@ This module contains an image viewer and drawing routines based on OpenCV.
 import numpy as np
 import cv2
 import time
+import matplotlib.pyplot as plt
 
 
 def is_in_bounds(mat, roi):
@@ -310,6 +311,9 @@ class ImageViewer(object):
             remaining_time = max(1, int(self._update_ms - 1e3*(t1-t0)))
             cv2.imshow(
                 self._caption, cv2.resize(self.image, self._window_shape[:2]))
+            # plt.imshow(cv2.resize(self.image, self._window_shape[:2]), cmap='gray', interpolation='bicubic')
+            # plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
+            # plt.show()
             key = cv2.waitKey(remaining_time)
             if key & 255 == 27:  # ESC
                 print("terminating")
